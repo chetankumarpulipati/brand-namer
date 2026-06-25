@@ -44,8 +44,6 @@
     "socket.io": "^4.7.0"
   },
   "devDependencies": {
-    "@brandnamer/config-ts": "workspace:*",
-    "@brandnamer/eslint-config": "workspace:*",
     "@types/bcryptjs": "^2.4.6",
     "@types/compression": "^1.7.5",
     "@types/cors": "^2.8.17",

@@ -64,26 +64,29 @@ app.use(errorHandler);
 // WebSocket
 setupWebSocket(io);
 
-// Start server
-httpServer.listen(config.port, () => {
-  console.log(`🚀 Brand Namer API running on port ${config.port}`);
-  console.log(`   Health: http://localhost:${config.port}/health`);
-  console.log(`   Environment: ${config.nodeEnv}`);
-});
+// Start server (skip in Vercel serverless)
+if (!process.env.VERCEL) {
+  httpServer.listen(config.port, () => {
+    console.log(`🚀 Brand Namer API running on port ${config.port}`);
+    console.log(`   Health: http://localhost:${config.port}/health`);
+    console.log(`   Environment: ${config.nodeEnv}`);
+  });
 
-// Graceful shutdown
-process.on("SIGTERM", async () => {
-  console.log("SIGTERM received, shutting down...");
-  httpServer.close();
-  await prisma.$disconnect();
-  process.exit(0);
-});
+  // Graceful shutdown
+  process.on("SIGTERM", async () => {
+    console.log("SIGTERM received, shutting down...");
+    httpServer.close();
+    await prisma.$disconnect();
+    process.exit(0);
+  });
 
-process.on("SIGINT", async () => {
-  console.log("SIGINT received, shutting down...");
-  httpServer.close();
-  await prisma.$disconnect();
-  process.exit(0);
-});
+  process.on("SIGINT", async () => {
+    console.log("SIGINT received, shutting down...");
+    httpServer.close();
+    await prisma.$disconnect();
+    process.exit(0);
+  });
+}
 
+export default app;
 export { app, httpServer, io };
