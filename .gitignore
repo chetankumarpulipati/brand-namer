@@ -54,3 +54,6 @@ apps/web/next-env.d.ts
 # terraform
 infra/terraform/.terraform/
 infra/terraform/terraform.tfstate*
+
+.vercel
+.env*

@@ -1,0 +1,8 @@
+.env
+.env.*
+*.local
+node_modules/
+.git/
+brand-namer/
+apache-maven-3.9.16/
+docker-data/
