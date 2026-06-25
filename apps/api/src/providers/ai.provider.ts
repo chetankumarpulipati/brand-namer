@@ -103,10 +103,35 @@ class NVIDIAProvider implements AiProvider {
   }
 }
 
+class AerolinkProvider implements AiProvider {
+  private client: OpenAI;
+
+  constructor() {
+    this.client = new OpenAI({
+      apiKey: config.aerolink.apiKey,
+      baseURL: config.aerolink.apiUrl,
+    });
+  }
+
+  async generate(prompt: string, options?: { temperature?: number; maxTokens?: number }): Promise<string> {
+    const response = await this.client.chat.completions.create({
+      model: config.aerolink.model,
+      messages: [
+        { role: "system", content: "You are a brand naming expert. Return only valid JSON." },
+        { role: "user", content: prompt },
+      ],
+      temperature: options?.temperature ?? 0.7,
+      max_tokens: options?.maxTokens ?? 2000,
+    });
+    return response.choices[0]?.message?.content ?? "";
+  }
+}
+
 export function createAiProvider(): AiProvider {
   if (config.openai.apiKey && config.anthropic.apiKey) return new FallbackAiProvider();
+  if (config.aerolink.apiKey) return new AerolinkProvider();
   if (config.openai.apiKey) return new OpenAIProvider();
   if (config.anthropic.apiKey) return new AnthropicProvider();
   if (config.nvidia.apiKey) return new NVIDIAProvider();
-  throw new Error("No AI provider configured (set OPENAI_API_KEY, ANTHROPIC_API_KEY, or NVIDIA_API_KEY)");
+  throw new Error("No AI provider configured (set OPENAI_API_KEY, ANTHROPIC_API_KEY, NVIDIA_API_KEY, or AEROLINK_API_KEY)");
 }

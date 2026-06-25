@@ -113,9 +113,9 @@ export class SearchService {
     const allResults = [];
     for (const keyword of params.keywords) {
       const names = await this.generateWithStrategy("COMPOUND", keyword, params.industry, undefined, params.countPerKeyword ?? 5);
-      for (const name of names) {
-        const scores = await this.scoreName(name, keyword);
-        allResults.push({ keyword, name, scores });
+      for (const item of names) {
+        const scores = await this.scoreName(item.name, keyword);
+        allResults.push({ keyword, name: item, scores });
       }
     }
 
@@ -135,9 +135,9 @@ export class SearchService {
         data: {
           searchHistoryId: searchRecord.id,
           userId: params.userId,
-          name: r.name,
+          name: r.name.name,
           strategy: "COMPOUND",
-          meaning: r.scores?.explanation,
+          meaning: r.name.meaning ?? r.scores?.explanation,
           memorability: r.scores?.memorability,
           pronounceability: r.scores?.pronounceability,
           uniqueness: r.scores?.uniqueness,

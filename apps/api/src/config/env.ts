@@ -34,6 +34,12 @@ export const config = {
     model: process.env.NVIDIA_API_MODEL ?? "meta/llama-3.1-8b-instruct",
   },
 
+  aerolink: {
+    apiKey: process.env.AEROLINK_API_KEY ?? "",
+    apiUrl: process.env.AEROLINK_BASE_URL ?? "https://aerolink.lat/v1",
+    model: process.env.AEROLINK_MODEL ?? "claude-sonnet-4-20250514",
+  },
+
   supabase: {
     url: process.env.SUPABASE_URL ?? "",
     serviceKey: process.env.SUPABASE_SERVICE_KEY ?? "",
