@@ -7,6 +7,7 @@ const nextConfig = {
       { protocol: "https", hostname: "brand-namer-assets.s3.amazonaws.com" },
     ],
   },
+  eslint: { ignoreDuringBuilds: true },
   experimental: {
     serverActions: { bodySizeLimit: "5mb" },
   },

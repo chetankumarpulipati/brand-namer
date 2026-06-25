@@ -330,25 +330,31 @@ export default function SearchPage() {
                     </ul>
                   </div>
                 )}
-                {trademarkData[i]?.length > 0 && trademarkData[i]![0].status !== "check unavailable (no API key)" && (
-                  <div className="mt-3 rounded-md border bg-purple-50 p-3 text-sm">
-                    <p className="mb-1 font-medium text-purple-800">Trademark Status</p>
-                    <ul className="space-y-0.5">
-                      {trademarkData[i].map((t, j) => (
-                        <li key={j} className="flex items-center justify-between">
-                          <span className="text-purple-700">{t.jurisdiction ?? "Global"}</span>
-                          <span className="font-medium text-purple-900">{t.status}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {trademarkData[i]?.length > 0 && trademarkData[i]![0].status === "check unavailable (no API key)" && (
-                  <div className="mt-3 rounded-md border bg-gray-50 p-3 text-sm">
-                    <p className="mb-1 font-medium text-gray-600">Trademark Check</p>
-                    <p className="text-gray-500">Add a free USPTO API key in settings to enable trademark checking.</p>
-                  </div>
-                )}
+                {(() => {
+                  const td = trademarkData[i];
+                  if (!td || td.length === 0) return null;
+                  const first = td[0]!;
+                  if (first.status === "check unavailable (no API key)")
+                    return (
+                      <div className="mt-3 rounded-md border bg-gray-50 p-3 text-sm">
+                        <p className="mb-1 font-medium text-gray-600">Trademark Check</p>
+                        <p className="text-gray-500">Add a free USPTO API key in settings to enable trademark checking.</p>
+                      </div>
+                    );
+                  return (
+                    <div className="mt-3 rounded-md border bg-purple-50 p-3 text-sm">
+                      <p className="mb-1 font-medium text-purple-800">Trademark Status</p>
+                      <ul className="space-y-0.5">
+                        {td.map((t, j) => (
+                          <li key={j} className="flex items-center justify-between">
+                            <span className="text-purple-700">{t.jurisdiction ?? "Global"}</span>
+                            <span className="font-medium text-purple-900">{t.status}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })()}
               </div>
             ))}
           </div>
