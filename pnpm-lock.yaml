@@ -99,12 +99,6 @@ importers:
         specifier: ^3.23.0
         version: 3.25.76
     devDependencies:
-      '@brandnamer/config-ts':
-        specifier: workspace:*
-        version: link:../../packages/config-ts
-      '@brandnamer/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
       '@types/bcryptjs':
         specifier: ^2.4.6
         version: 2.4.6
