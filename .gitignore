@@ -1,0 +1,56 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# builds
+dist/
+.next/
+build/
+out/
+
+# env
+.env
+.env.*.local
+.env.production
+.env.development
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+logs/
+
+# turbo
+.turbo/
+
+# test
+coverage/
+
+# prisma
+apps/api/prisma/migrations/
+
+# docker
+docker-data/
+
+# stray local dir
+brand-namer/
+
+# apache maven (not project code)
+apache-maven-3.9.16/
+
+# build artifacts
+*.tsbuildinfo
+apps/web/next-env.d.ts
+
+# terraform
+infra/terraform/.terraform/
+infra/terraform/terraform.tfstate*

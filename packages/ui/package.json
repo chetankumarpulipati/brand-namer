@@ -1,0 +1,40 @@
+{
+  "name": "@brandnamer/ui",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*/index.d.ts",
+      "import": "./dist/components/*/index.js",
+      "require": "./dist/components/*/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "clean": "rm -rf dist",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tailwind-merge": "^2.3.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.400.0"
+  },
+  "devDependencies": {
+    "@brandnamer/config-ts": "workspace:*",
+    "@brandnamer/eslint-config": "workspace:*",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.4.0"
+  }
+}
